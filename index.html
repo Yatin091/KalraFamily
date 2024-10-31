@@ -4,22 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diwali Card</title>
     <link rel="stylesheet" href="./style.css">
-    <style>
-        /* Style for the YouTube background video */
-        #background-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none; /* Make the video unclickable */
-        }
-    </style>
 </head>
 <body>
-    <!-- YouTube background video container -->
-    <div id="background-video"></div>
+    <!-- Audio element without autoplay -->
+    <audio id="diwaliAudio" loop>
+        <source src="YOUR_AUDIO_FILE_URL.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <div class="cont">
         <div class="card">
@@ -45,29 +36,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
     <script src="script.js"></script>
     
-    <!-- Load the YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
-        // Function called by the YouTube API when it's ready
-        function onYouTubeIframeAPIReady() {
-            new YT.Player('background-video', {
-                videoId: 'G7XDAmFSPLE', // YouTube video ID
-                playerVars: {
-                    autoplay: 1,
-                    controls: 0,
-                    showinfo: 0,
-                    modestbranding: 1,
-                    loop: 1,
-                    playlist: 'G7XDAmFSPLE', // Required to loop
-                    mute: 1 // Mute the video
-                },
-                events: {
-                    onReady: function (event) {
-                        event.target.playVideo();
-                    }
-                }
-            });
-        }
+        // Play audio on first user interaction (e.g., click)
+        document.addEventListener('click', function() {
+            const audio = document.getElementById('diwaliAudio');
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true }); // Ensures this only runs once
     </script>
 </body>
 </html>
